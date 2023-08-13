@@ -1,9 +1,9 @@
-function MyOrders() {
+function NotFound() {
     return (
      <div className="bg-red-100">
-       MyOrders
+       NotFound
      </div>
     )
   }
   
-  export default MyOrders
+  export default NotFound
