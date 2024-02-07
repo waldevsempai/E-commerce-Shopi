@@ -1,6 +1,6 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
-const OrderCard = props => {
+const OrderCard = (props) => {
     // eslint-disable-next-line react/prop-types
     const { id, title, price, imageUrl, handleDelete } = props
     let renderXMarkIcon
@@ -20,8 +20,6 @@ const OrderCard = props => {
               <p className='text-lg font-medium'>{price}</p>
               {renderXMarkIcon}
             </div>
-            
-
         </div>
     )
 }

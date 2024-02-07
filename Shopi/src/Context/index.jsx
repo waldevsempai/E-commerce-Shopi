@@ -38,8 +38,8 @@ export const ShoppingCartProvider = ({children}) => {
     // Get Products by category
     const [searchByCategory, setSearchByCategory] = useState(null)
 
-    useEffect( () => {
-      fetch("https://fakestoreapi.com/products")
+    useEffect(() => {
+      fetch("https://api.escuelajs.co/api/v1/products")
       .then((response) => response.json())
       .then((data) => setItems(data))
     }, [])
@@ -69,13 +69,26 @@ export const ShoppingCartProvider = ({children}) => {
       }
     }
 
-    useEffect( () => {
-      if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
-      if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
-      if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
-      if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
-    }, [items, searchByTitle, searchByCategory])
+    useEffect(() => {
+      let filteredResults = items;
+  
+      if (searchByTitle || searchByCategory) {
+        filteredResults = filterBy(
+          searchByTitle && searchByCategory
+            ? "BY_TITLE_AND_CATEGORY"
+            : searchByTitle
+            ? "BY_TITLE"
+            : "BY_CATEGORY",
+          items,
+          searchByTitle,
+          searchByCategory
+        );
+      }
+  
+      setFilteredItems(filteredResults);
+    }, [items, searchByTitle, searchByCategory]);
 
+  
     return (
         <ShoppingCartContext.Provider value={{
           count,
@@ -105,3 +118,10 @@ export const ShoppingCartProvider = ({children}) => {
         </ShoppingCartContext.Provider>
     )
 }
+
+//useEffect( () => {
+  //if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
+  //if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
+  //if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
+  //if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
+//}, [items, searchByTitle, searchByCategory])

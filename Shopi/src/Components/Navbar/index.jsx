@@ -7,7 +7,6 @@ const Navbar = () => {
     const context = useContext(ShoppingCartContext)
     const activeStyle = 'underline underline-offset-4'
 
-    
     return (
         <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light'>
             <ul className='flex items-center gap-3'>
@@ -22,7 +21,7 @@ const Navbar = () => {
                       to='/'
                       onClick={() => context.setSearchByCategory()}
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "") 
                       }>
                         All
                     </NavLink>
@@ -32,7 +31,7 @@ const Navbar = () => {
                       to='/clothes'
                       onClick={() => context.setSearchByCategory('clothes')}
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "") 
                       }>
                         Clothes
                     </NavLink>
@@ -42,7 +41,7 @@ const Navbar = () => {
                       to='/electronics'
                       onClick={() => context.setSearchByCategory('electronics')}
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "") 
                       }>
                         Electronics
                     </NavLink>
@@ -52,7 +51,7 @@ const Navbar = () => {
                       to='/furnitures'
                       onClick={() => context.setSearchByCategory('furnitures')}
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "")
                       }>
                         Furnitures
                     </NavLink>
@@ -62,7 +61,7 @@ const Navbar = () => {
                       to='/toys'
                       onClick={() => context.setSearchByCategory('toys')}
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "")
                       }>
                         Toys
                     </NavLink>
@@ -72,7 +71,7 @@ const Navbar = () => {
                       to='/others'
                       onClick={() => context.setSearchByCategory('others')}
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "")
                       }>
                         Others
                     </NavLink>
@@ -86,7 +85,7 @@ const Navbar = () => {
                     <NavLink 
                       to='/my-orders'
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "") 
                       }>
                         My Orders
                     </NavLink>
@@ -95,7 +94,7 @@ const Navbar = () => {
                     <NavLink 
                       to='/my-account'
                       className={({ isActive }) =>
-                      isActive ? activeStyle : undefined 
+                      (isActive ? activeStyle : "") 
                       }>
                         My Account
                     </NavLink>
@@ -104,13 +103,13 @@ const Navbar = () => {
                     <NavLink 
                     to='/sign-in'
                     className={({ isActive }) =>
-                    isActive ? activeStyle : undefined 
+                    (isActive ? activeStyle : "")
                     }>
                       Sign In
                     </NavLink>
                 </li>
                 <li className= 'flex items-center'>
-                <ShoppingBagIcon className='h-6 w-6 text-black-500'></ShoppingBagIcon>
+                <ShoppingBagIcon className='h-6 w-6 text-black-500' />
                 <div>
                       {context.cartProducts.length}
                 </div> 
