@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useState, useEffect } from 'react'
 
-export const ShoppingCartContext = createContext()
+export const ShoppingCartContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const ShoppingCartProvider = ({children}) => {
@@ -8,7 +9,7 @@ export const ShoppingCartProvider = ({children}) => {
     const [count, setCount] = useState(0)
 
     // Product Detail · Open/Close
-    const [ isProductDetailOpen, setIsProductDetailOpen] = useState(false)
+    const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
     const  openProductDetail = () => setIsProductDetailOpen(true)
     const  closeProductDetail = () => setIsProductDetailOpen(false)
 
@@ -18,7 +19,7 @@ export const ShoppingCartProvider = ({children}) => {
     const  closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false)
 
     // Product Detail · Show product
-    const [productToShow, setProducToShow] = useState({})
+    const [productToShow, setProductToShow] = useState({})
 
     // Product Cart · Add products to cart
     const [cartProducts, setCartProducts] = useState([])
@@ -38,29 +39,30 @@ export const ShoppingCartProvider = ({children}) => {
     const [searchByCategory, setSearchByCategory] = useState(null)
 
     useEffect( () => {
-      fetch('https://api.escuelajs.co/api/v1/products')
-      .then(response => response.json())
-      .then(data => setItems(data))
+      fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => setItems(data))
     }, [])
 
-    const filteredItemsbyTitle = (items, searchByTitle) => {
-      return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    const filteredItemsByTitle = (items, searchByTitle) => {
+      return items?.filter((item) => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
     }
 
-    const filteredItemsbyCategory = (items, searchByCategory) => {
-      return items?.filter(item => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
+    const filteredItemsByCategory = (items, searchByCategory) => {
+      return items?.filter((item) => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
     }
 
     const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
       if (searchType === 'BY_TITLE') {
-        return filteredItemsbyTitle(items, searchByTitle)
+        return filteredItemsByTitle(items, searchByTitle)
       }
 
       if (searchType === 'BY_CATEGORY') {
-        return filteredItemsbyCategory(items, searchByCategory)
+        return filteredItemsByCategory(items, searchByCategory)
       }
       if (searchType === 'BY_TITLE_AND_CATEGORY') {
-        return filteredItemsbyCategory(items, searchByCategory).filter(item => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
+        return filteredItemsByCategory(items, searchByCategory).filter((item) => 
+               item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
       }
       if (!searchType) {
         return items
@@ -82,7 +84,7 @@ export const ShoppingCartProvider = ({children}) => {
           closeProductDetail,
           isProductDetailOpen,
           productToShow, 
-          setProducToShow,
+          setProductToShow,
           cartProducts,
           setCartProducts,
           isCheckoutSideMenuOpen,
@@ -95,10 +97,9 @@ export const ShoppingCartProvider = ({children}) => {
           searchByTitle,
           setSearchByTitle,
           filteredItems,
+          setFilteredItems,
           searchByCategory,
-          setSearchByCategory,
-          filterBy,
-
+          setSearchByCategory
         }}>
             {children}
         </ShoppingCartContext.Provider>
